@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Settings</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="settings.html" class="active" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h1>System Settings</h1>
+    <p>This section is available to administrators only. Use it to manage users, statuses and categories across modules.</p>
+
+    <!-- User management -->
+    <div class="card">
+      <h2>User Management</h2>
+      <form id="addUserForm" class="inline-form">
+        <input type="text" id="newUsername" placeholder="Username" required>
+        <input type="password" id="newPassword" placeholder="Password" required>
+        <input type="email" id="newUserEmail" placeholder="Email (optional)">
+        <!-- Link this user to an existing employee (optional).  Selecting an employee
+             allows actions assigned to that employee to appear on the user's dashboard. -->
+        <select id="newUserEmployee">
+          <option value="">-- Link Employee (optional) --</option>
+        </select>
+        <select id="newRole">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Add User</button>
+      </form>
+      <!-- Search and export controls for user list -->
+      <div class="table-controls">
+        <input type="text" id="userSearch" placeholder="Search users…">
+        <button id="userExport">Export CSV</button>
+      </div>
+      <table id="userTable">
+        <tr><th>Username</th><th>Email</th><th>Role</th><th>Last Login</th><th>Status</th><th>Actions</th></tr>
+      </table>
+    </div>
+
+    <!-- Data Management: statuses and categories -->
+    <div class="grid-2">
+      <div class="card">
+        <h2>Status Management</h2>
+        <div id="statusSettings"></div>
+      </div>
+      <div class="card">
+        <h2>Category Management</h2>
+        <div id="categorySettings"></div>
+      </div>
+    </div>
+
+    <!-- Course management -->
+    <div class="card">
+      <h2>Training Course Management</h2>
+      <p>Define individual training courses. Each course has a title and is associated with a category. These training courses are used when scheduling training sessions and can be mapped to roles.</p>
+      <div id="courseSettings"></div>
+    </div>
+
+    <!-- Role & Permissions Management -->
+    <div class="grid-2">
+      <div class="card">
+        <h2>Role Management</h2>
+        <p>Define employee roles used across the system. Roles can be assigned to employees when they are added.</p>
+        <div id="roleSettings"></div>
+      </div>
+      <div class="card">
+        <h2>Editor Roles</h2>
+        <p>Select which roles are allowed to view and edit all records (in addition to Admin). These roles can access the settings page and manage all data.</p>
+        <div id="editRoleSettings"></div>
+      </div>
+      <div class="card">
+        <h2>QA Verification Roles</h2>
+        <p>Select which roles are part of the Quality Assurance group. Users with these roles may verify actions in the system.</p>
+        <div id="qaRoleSettings"></div>
+      </div>
+    </div>
+
+    <!-- Role training & course requirements -->
+    <div class="grid-2">
+      <div class="card">
+        <h2>Training Categories by Role</h2>
+        <p>Assign training categories to each role. Employees will be required to complete all categories assigned to their role.</p>
+        <div id="roleTrainingSettings"></div>
+      </div>
+      <div class="card">
+        <h2>Course Requirements by Role</h2>
+        <p>Assign specific training courses to each role. Employees will be required to complete all courses assigned to their role.</p>
+        <div id="roleCourseSettings"></div>
+      </div>
+    </div>
+
+    <!-- Role & Module Permissions -->
+    <div class="card">
+      <h2>Role &amp; Module Permissions</h2>
+      <p>Control which modules each role can access. Untick a module to hide it from users with that role. Administrators always have full access.</p>
+      <div id="rolePermissionSettings"></div>
+    </div>
+
+    <!-- Notification and Reminder settings -->
+    <div class="card">
+      <h2>Notifications & Reminders</h2>
+      <p>Configure email settings and default reminder timing. These values are used by the application to send assignment and due-date reminders.</p>
+      <form id="notificationForm" class="grid-3">
+        <div>
+          <label>SMTP Host</label>
+          <input type="text" id="smtpHost" placeholder="smtp.zeptomail.com">
+          <label>SMTP Port</label>
+          <input type="number" id="smtpPort" placeholder="465" min="1">
+          <label>SMTP User</label>
+          <input type="text" id="smtpUser" placeholder="your_zeptomail_username">
+        </div>
+        <div>
+          <label>SMTP Password</label>
+          <input type="password" id="smtpPass">
+          <label>From Email</label>
+          <input type="email" id="fromEmail" placeholder="notifications@yourcompany.com">
+          <label>Default Reminder Days</label>
+          <input type="number" id="defaultReminder" min="0" placeholder="2">
+        </div>
+        <div>
+          <label>Backend Endpoint</label>
+          <input type="url" id="backendUrl" placeholder="https://your-backend.onrender.com/sendEmail">
+          <div class="align-end" style="margin-top: 1.5rem;">
+            <button type="submit">Save Notification Settings</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Risk Scoring Thresholds -->
+    <div class="card">
+      <h2>Risk Scoring Thresholds</h2>
+      <p>Define the threshold values used to determine risk ratings (Low, Medium, High). Adjusting these values will affect risk color coding and severity calculations across the system.</p>
+      <form id="riskThresholdForm" class="grid-3">
+        <div>
+          <label>Low threshold (max score)</label>
+          <input type="number" id="riskThrLow" min="1" placeholder="e.g., 4">
+        </div>
+        <div>
+          <label>Medium threshold (max score)</label>
+          <input type="number" id="riskThrMedium" min="1" placeholder="e.g., 8">
+        </div>
+        <div>
+          <label>High threshold (min score)</label>
+          <input type="number" id="riskThrHigh" min="1" placeholder="e.g., 12">
+        </div>
+        <div class="align-end" style="margin-top: 1rem;">
+          <button type="submit">Save Risk Thresholds</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Interface & Localization -->
+    <div class="card">
+      <h2>Interface &amp; Localization</h2>
+      <p>Toggle the layout direction for right-to-left languages. Enabling RTL will reorder text and menus to support Arabic and other RTL languages.</p>
+      <label><input type="checkbox" id="rtlToggle"> Enable RTL mode</label>
+    </div>
+
+    <!-- Retention & Reminder Settings -->
+    <div class="card">
+      <h2>Retention &amp; Reminder Settings</h2>
+      <p>Configure how long records should be kept before automatic archival and override default reminder days for each module. Leaving a value blank disables automatic archival or uses the global reminder default.</p>
+      <table id="retentionTable"></table>
+      <div style="margin-top: 1rem;">
+        <button id="saveRetention">Save Retention &amp; Reminder Settings</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,460 @@
+/* Right-to-left layout support */
+html[dir="rtl"] body {
+  direction: rtl;
+}
+html[dir="rtl"] .navbar {
+  display: flex;
+  flex-direction: row-reverse;
+}
+html[dir="rtl"] .navbar a {
+  float: right;
+}
+html[dir="rtl"] .container,
+html[dir="rtl"] .card,
+html[dir="rtl"] table,
+html[dir="rtl"] input,
+html[dir="rtl"] select,
+html[dir="rtl"] textarea {
+  text-align: right;
+}
+/* ------------------------------------------------------------------ */
+/* Base styles and global variables                                  */
+/*                                                                   */
+/* To present the demo more professionally we've introduced CSS      */
+/* variables for consistent colours and spacing, improved typography */
+/* and subtle shadows. These changes maintain existing layouts but   */
+/* lift the UI with modern polish.                                   */
+/* ------------------------------------------------------------------ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root {
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-border: #e5e9f2;
+  --color-primary: #233043;
+  --color-primary-dark: #1a2433;
+  --color-accent: #3d6dbc;
+  --color-text: #1f2933;
+  --color-muted: #6b7280;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+}
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.4;
+}
+/* ------------------------------------------------------------------ */
+/* Navigation bar                                                    */
+/* ------------------------------------------------------------------ */
+.navbar {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+.navbar h2 {
+  margin-right: auto;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.85;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.2s, opacity 0.2s;
+}
+.navbar a:hover,
+.navbar a.active {
+  opacity: 1;
+  background: var(--color-primary-dark);
+}
+
+/* Display the logged-in user at the end of the navbar */
+.navbar .nav-user {
+  margin-left: auto;
+  margin-right: 12px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* A smaller container for login and other narrow forms */
+.container.small {
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+/* Error message styling */
+.error {
+  color: #c73636;
+  margin-top: 12px;
+}
+
+/* Controls above tables: search and export buttons */
+.table-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+.table-controls input[type="text"] {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+.table-controls button {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
+/* Style for small informational text used in settings panels */
+.small-text {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 8px;
+}
+
+/* Style the list of pending tasks on the dashboard */
+#myTasksList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+#myTasksList li {
+  border-bottom: 1px solid var(--color-border);
+  padding: 6px 0;
+  font-size: 0.9rem;
+}
+#myTasksList li:last-child {
+  border-bottom: none;
+}
+
+/* Small informational text, used in settings panels */
+.small-text {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 8px;
+}
+
+/* Inline form within cards for compact input groups */
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.inline-form input,
+.inline-form select {
+  flex: 1 1 150px;
+}
+/* ------------------------------------------------------------------ */
+/* Layout containers                                                 */
+/* ------------------------------------------------------------------ */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+h1,h2,h3,h4 {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+h1,h2 { margin-top: 0; }
+.kpi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.kpi-title {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.kpi-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+button {
+  padding: 8px 14px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  transition: background 0.2s, transform 0.1s;
+}
+button:hover {
+  background: #355ba5;
+}
+button:active {
+  transform: translateY(1px);
+}
+.mt { margin-top: 26px; }
+.right { text-align: right; margin-top: 12px; }
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+fieldset.fieldset {
+  border: 1px solid var(--color-border);
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+.tags label {
+  margin-right: 14px;
+  display: inline-block;
+  margin-top: 8px;
+}
+legend {
+  padding: 0 6px;
+}
+form label {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.92rem;
+  color: var(--color-muted);
+}
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 7px 8px;
+  margin-top: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.92rem;
+  color: var(--color-text);
+}
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: 2px solid var(--color-accent);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #f1f4f8;
+  text-align: left;
+  font-size: 0.95rem;
+  vertical-align: top;
+}
+tr:nth-child(even) {
+  background: #fafbfd;
+}
+tr:hover td {
+  background: #f5f7fb;
+}
+.status-bar {
+  margin: 14px 0;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+.status-bar.legend {
+  color: var(--color-muted);
+  font-weight: normal;
+  background: #eef2f8;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.kanban {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+.kanban div {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 10px;
+  flex: 1;
+  box-shadow: var(--shadow-sm);
+}
+.kanban div h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+.kanban ul {
+  list-style: none;
+  padding-left: 0;
+}
+.kanban li {
+  background: #f4f6fb;
+  border: 1px solid #e3e9f3;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  box-shadow: var(--shadow-sm);
+}
+.kanban li button {
+  margin-right: 6px;
+  margin-top: 6px;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+.list {
+  list-style: disc;
+  padding-left: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.tabs {
+  margin-top: 10px;
+}
+.tablink {
+  padding: 8px 12px;
+  margin-right: 6px;
+  background: #e8ecf3;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: background 0.2s;
+}
+.tablink:hover {
+  background: #d8deea;
+}
+.tabcontent {
+  display: none;
+  background: var(--color-surface);
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #eef2f8;
+  font-size: 12px;
+  margin-left: 6px;
+  color: var(--color-primary);
+}
+.badge.overdue {
+  background: #ffe8e8;
+  color: #c73636;
+}
+
+/* Colour coding for complaint statuses */
+.badge.status-new { background: #f3f4f6; color: #4b5563; }
+.badge.status-in-review { background: #fff4db; color: #9a6a00; }
+.badge.status-under-investigation { background: #fde8e8; color: #b91c1c; }
+.badge.status-actioning { background: #e0f2fe; color: #075985; }
+.badge.status-verifying { background: #e0e7ff; color: #3730a3; }
+.badge.status-closed { background: #dcfce7; color: #065f46; }
+
+/* ------------------------------------------------------------------ */
+/* Additional badge colours for new modules                           */
+/* These classes map to status strings used in the Permit to Work,   */
+/* Safety Issues, SDS and Training modules. New statuses follow the  */
+/* same pattern as the existing complaints by using soft backgrounds  */
+/* and clear text colours.                                           */
+/* ------------------------------------------------------------------ */
+
+/* Permit to Work statuses */
+.badge.status-requested    { background: #f3f4f6; color: #4b5563; }
+.badge.status-approved     { background: #e0f7ff; color: #0369a1; }
+.badge.status-in-progress  { background: #fff4db; color: #9a6a00; }
+.badge.status-closed       { background: #dcfce7; color: #065f46; }
+
+/* Safety Issue statuses */
+.badge.status-investigating { background: #fde8e8; color: #b91c1c; }
+/* reuse .status-actioning and .status-closed from complaints */
+
+/* SDS statuses */
+.badge.status-valid            { background: #e0f7ff; color: #0369a1; }
+.badge.status-expired          { background: #fde8e8; color: #b91c1c; }
+.badge.status-pending-revision { background: #fff4db; color: #9a6a00; }
+
+/* Training statuses */
+.badge.status-scheduled { background: #e0e7ff; color: #3730a3; }
+.badge.status-completed { background: #dcfce7; color: #065f46; }
+.badge.status-overdue   { background: #fde8e8; color: #b91c1c; }
+
+/* Training requirement badges used in employee detail */
+.badge.training-complete { background: #dcfce7; color: #065f46; }
+.badge.training-pending  { background: #fde8e8; color: #b91c1c; }
+/* Badge for scheduled trainings (upcoming sessions) */
+.badge.training-scheduled { background: #fff7ed; color: #92400e; }
+
+/* Image grid used to display uploaded photos for safety issues */
+.image-grid img {
+  margin: 4px;
+  max-width: 150px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/*
+ * Module link cards styling
+ *
+ * The home page displays a grid of cards linking to each module.  To
+ * improve visual recognition, each link includes a small icon next to
+ * the module name.  The flexbox layout keeps the icon and text aligned,
+ * while fixed sizes prevent layout shifts when additional modules are
+ * added.  If you wish to customise icons per module in the future,
+ * simply update the <img> src in index.html and adjust sizes here.
+ */
+.link-card a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.link-card img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}

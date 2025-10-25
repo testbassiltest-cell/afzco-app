@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Risk Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="risk.html">Back to Risk Register</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Risk Detail</h2>
+    <div id="riskHeader" class="card"></div>
+    <div class="tabs">
+      <button class="tablink" onclick="openTab(event,'rs_overview')">Overview</button>
+      <button class="tablink" onclick="openTab(event,'rs_history')">History</button>
+    </div>
+    <div id="rs_overview" class="tabcontent">
+      <div id="riskOverview"></div>
+      <h3>Update Status</h3>
+      <form id="riskStatusForm" class="card">
+        <label>Status</label>
+        <select id="riskStatusSelect"></select>
+        <button type="button" onclick="saveRiskStatus()">Save Status</button>
+      </form>
+    </div>
+    <div id="rs_history" class="tabcontent">
+      <h3>History</h3>
+      <ul id="riskHistory" class="list"></ul>
+    </div>
+  </div>
+</body>
+</html>

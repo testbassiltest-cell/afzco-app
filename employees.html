@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employees</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html" class="active">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Employees</h2>
+    <div class="card">
+      <h3>Add Employee</h3>
+      <form id="employeeForm" class="grid-3">
+        <div>
+          <label>Name</label><input type="text" id="empName" required>
+          <label>Employee ID</label><input type="text" id="empId" required>
+          <label>Email</label><input type="email" id="empEmail" placeholder="user@example.com">
+        </div>
+        <div>
+          <label>Department</label><input type="text" id="empDept">
+          <label>Position</label><input type="text" id="empPosition">
+          <label>Role</label>
+          <select id="empRole"></select>
+        </div>
+        <div>
+          <button type="submit" class="mt">Add Employee</button>
+        </div>
+      </form>
+    </div>
+    <!-- Table controls: search/filter and export to CSV -->
+    <div class="table-controls">
+      <input type="text" id="searchEmployees" placeholder="Search employees…">
+      <button id="exportEmployees">Export CSV</button>
+    </div>
+    <h3>Employee List</h3>
+    <table id="employeeTable">
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Position</th><th>Role</th><th>Manage</th><th>Delete</th></tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Training Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="training.html">Back to Training</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Training Detail</h2>
+    <div id="trainingHeader" class="card"></div>
+    <div class="tabs">
+      <button class="tablink" onclick="openTab(event,'tr_overview')">Overview</button>
+      <button class="tablink" onclick="openTab(event,'tr_actions')">Actions</button>
+      <button class="tablink" onclick="openTab(event,'tr_history')">History</button>
+    </div>
+    <div id="tr_overview" class="tabcontent">
+      <div id="trainingOverview"></div>
+      <h3>Update Status</h3>
+      <form id="trainingStatusForm" class="card">
+        <label>Status</label>
+        <select id="trainingStatusSelect">
+          <option>Scheduled</option>
+          <option>Completed</option>
+          <option>Overdue</option>
+        </select>
+        <button type="button" onclick="saveTrainingStatus()">Save Status</button>
+      </form>
+    </div>
+    <div id="tr_actions" class="tabcontent">
+      <h3>Add Action</h3>
+      <form id="trainingActionForm" class="grid-3 card">
+        <div>
+          <label>Title</label><input type="text" id="trActTitle" required>
+          <label>Owner</label><input type="text" id="trActOwner">
+        </div>
+        <div>
+          <label>Department</label><input type="text" id="trActDept">
+          <label>Due Date</label><input type="date" id="trActDue">
+        </div>
+        <div>
+          <button type="submit" class="mt">Add Action</button>
+        </div>
+      </form>
+      <h3>Actions List</h3>
+      <ul id="trainingActionList" class="list"></ul>
+    </div>
+    <div id="tr_history" class="tabcontent">
+      <h3>History</h3>
+      <ul id="trainingHistory" class="list"></ul>
+    </div>
+  </div>
+</body>
+</html>

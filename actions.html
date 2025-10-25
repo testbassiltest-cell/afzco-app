@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Action Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html" class="active">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Action Management</h2>
+    <form id="actionForm" class="grid-3 card">
+      <div>
+        <label>Title</label><input type="text" id="actionTitle" required>
+        <label>Source</label><select id="actionSource"><option>Complaint</option><option>MOM</option><option>Audit</option><option>Other</option></select>
+      </div>
+      <div>
+        <label>Owner</label>
+        <!-- Populated dynamically with employees -->
+        <select id="actionOwner"></select>
+        <label>Department</label><input type="text" id="actionDept">
+      </div>
+      <div>
+        <label>Due Date</label><input type="date" id="actionDue">
+        <label>Reminder (days before)</label><input type="number" id="actionReminder" min="0" placeholder="e.g., 2">
+        <button type="submit" class="mt">Add Action</button>
+      </div>
+    </form>
+
+    <h3>Action Board (Owner → QA Verify)</h3>
+    <div class="kanban">
+      <div><h4>Open</h4><ul id="kanbanOpen"></ul></div>
+      <div><h4>In Progress</h4><ul id="kanbanProgress"></ul></div>
+      <div><h4>Pending Verification</h4><ul id="kanbanPending"></ul></div>
+      <div><h4>Verified Closed</h4><ul id="kanbanClosed"></ul></div>
+    </div>
+
+    <!-- Bulk import controls -->
+    <div class="table-controls" style="margin-top: 1rem;">
+      <input type="file" id="actionImportFile" accept=".csv">
+      <button id="importActionsBtn">Import CSV</button>
+    </div>
+  </div>
+</body>
+</html>

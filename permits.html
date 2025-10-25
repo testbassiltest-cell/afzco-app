@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Permit to Work</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html" class="active">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Permit to Work</h2>
+    <div class="status-bar legend"><b>Lifecycle:</b> Requested → Approved → In Progress → Closed</div>
+    <div class="card">
+      <h3>New Permit Request</h3>
+      <!--
+        The permit form follows a structure commonly found in ISO‑compliant permit‑to‑work systems: the permit type is selected
+        (e.g. hot work, confined space, electrical), the location and timing are defined, hazards are identified and control
+        measures listed, and the issuer and responsible person information is captured【5671873580769†screenshot】.  
+        Fields marked as required must be completed before submission.
+      -->
+      <form id="permitForm" class="grid-3">
+        <div>
+          <label>Permit Type</label>
+          <select id="permitType" required>
+            <option value="">-- Select --</option>
+            <option>Hot Work</option>
+            <option>Cold Work</option>
+            <option>Confined Space</option>
+            <option>Electrical</option>
+            <option>Working at Height</option>
+            <option>Excavation</option>
+            <option>Environmental/Discharge</option>
+            <option>Other</option>
+          </select>
+          <label>Work Title</label><input type="text" id="permitTitle" required>
+          <label>Location</label><input type="text" id="permitLocation" placeholder="Plant/Area">
+          <label>Start Date</label><input type="date" id="permitStart">
+          <label>End Date</label><input type="date" id="permitEnd">
+        </div>
+        <div>
+          <label>Hazards Identified</label>
+          <textarea id="permitHazards" placeholder="List potential environmental and safety hazards"></textarea>
+          <label>Control Measures / PPE &amp; Isolation</label>
+          <textarea id="permitControls" placeholder="Describe mitigation measures, PPE required and isolation/LOTO procedures"></textarea>
+          <label>Environmental Aspects / Impacts</label>
+          <textarea id="permitEnvAspects" placeholder="Detail any potential environmental impacts (e.g. emissions, spill risk)"></textarea>
+          <label>Waste Management &amp; Disposal</label>
+          <textarea id="permitWaste" placeholder="Describe how wastes will be collected, segregated and disposed"></textarea>
+          <label>Emergency / Spill Response</label>
+          <textarea id="permitEmergency" placeholder="Describe emergency procedures and contacts"></textarea>
+          <label>Issuer</label><input type="text" id="permitIssuer" placeholder="Permit Issuer Name" required>
+          <label>Issuer Dept.</label><input type="text" id="permitIssuerDept" placeholder="Department">
+        </div>
+        <div>
+          <label>Person Performing Work</label><input type="text" id="permitRequester" placeholder="Responsible person" required>
+          <label>Department</label><input type="text" id="permitDept" placeholder="Department">
+          <label>Additional Notes</label>
+          <textarea id="permitDesc" placeholder="Other instructions or conditions"></textarea>
+          <button type="submit" class="mt">Submit Permit</button>
+        </div>
+      </form>
+    </div>
+    <!-- Table controls: search/filter and export to CSV -->
+    <div class="table-controls">
+      <input type="text" id="searchPermits" placeholder="Search permits…">
+      <button id="exportPermits">Export CSV</button>
+    </div>
+    <h3>Permits</h3>
+    <table id="permitTable">
+      <tr><th>No</th><th>Title</th><th>Location</th><th>Dept</th><th>Start</th><th>Status</th><th>Manage</th><th>Delete</th></tr>
+    </table>
+  </div>
+</body>
+</html>

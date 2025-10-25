@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minutes of Meeting (MOM)</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html" class="active">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Minutes of Meeting (MOM)</h2>
+    <form id="momForm" class="grid-3 card">
+      <div>
+        <label>Meeting No.</label><input type="text" id="momNo" placeholder="Auto if blank">
+        <label>Date/Time</label><input type="datetime-local" id="momDT">
+      </div>
+      <div>
+        <label>Organizer</label><input type="text" id="momOrg">
+        <label>Attendees</label><input type="text" id="momAtt" placeholder="Comma-separated">
+      </div>
+      <div>
+        <label>Agenda</label><textarea id="momAgenda" rows="3"></textarea>
+        <label>Decisions</label><textarea id="momDec" rows="3"></textarea>
+        <label>Next Review Date</label><input type="date" id="momNext">
+        <button type="submit" class="mt">Create MOM</button>
+      </div>
+    </form>
+
+    <!-- Table controls: search/filter and export to CSV -->
+    <div class="table-controls">
+      <input type="text" id="searchMom" placeholder="Search meetings…">
+      <button id="exportMom">Export CSV</button>
+    </div>
+    <h3>MOM List</h3>
+    <table id="momTable">
+      <tr><th>Mtg #</th><th>Date</th><th>Organizer</th><th>Attendees</th><th>Manage</th><th>Delete</th></tr>
+    </table>
+  </div>
+</body>
+</html>

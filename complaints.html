@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Complaints</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html" class="active">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Customer Complaints</h2>
+    <div class="status-bar legend"><b>Lifecycle:</b> New → In Review → Under Investigation → Actioning → Verifying → Closed</div>
+
+    <div class="card">
+      <h3>New Complaint Intake</h3>
+      <form id="complaintForm">
+        <div class="grid-2">
+          <div>
+            <label>Customer</label><input type="text" id="customer" required>
+            <label>Customer Code</label><input type="text" id="customerCode">
+            <label>Site/Location</label><input type="text" id="site">
+            <label>Contact Person</label><input type="text" id="contact">
+            <label>Email</label><input type="email" id="email">
+            <label>Phone</label><input type="text" id="phone">
+            <label>Service Category</label>
+            <select id="service">
+              <option>Hydro-jetting</option><option>Vacuum Truck</option><option>Hazardous Waste</option>
+              <option>Tank Cleaning</option><option>Sewer Line</option><option>Catalyst Handling</option>
+              <option>Bundle Pulling</option><option>Other</option>
+            </select>
+            <label>Service Order / Job #</label><input type="text" id="job">
+            <label>Contract #</label><input type="text" id="contract">
+            <label>Date/Time of Incident</label><input type="datetime-local" id="incidentDT">
+            <label>Reported By</label><input type="text" id="reportedBy">
+            <label>Channel</label>
+            <select id="channel"><option>Phone</option><option>Email</option><option>Portal</option><option>On-site</option></select>
+        <label>Assigned To</label>
+        <!-- Populated dynamically with employees -->
+        <select id="complaintAssignee"></select>
+        <label>Due Date</label>
+        <input type="date" id="complaintDue">
+        <label>Reminder (days before)</label>
+        <input type="number" id="complaintReminder" min="0" placeholder="e.g., 2">
+          </div>
+          <div>
+            <label>Complaint Title</label><input type="text" id="title" required>
+            <label>Problem Type</label>
+            <select id="problemType">
+              <option>Quality of Service</option><option>Safety</option><option>Environmental</option>
+              <option>Schedule</option><option>Billing</option><option>Staff Conduct</option>
+              <option>Equipment</option><option>Other</option>
+            </select>
+            <label>Common Defect (per Service)</label>
+            <select id="commonDefect"><option value="">-- Select after Service --</option></select>
+            <label>Description</label><textarea id="description" rows="6"></textarea>
+            <label>Affected Asset/Equipment</label><input type="text" id="asset">
+            <label>Geo-Location (optional)</label><input type="text" id="geo">
+            <fieldset class="fieldset">
+              <legend>Initial Impact (optional)</legend>
+              <label>People/Safety</label><input type="text" id="impactPeople">
+              <label>Environment</label><input type="text" id="impactEnv">
+              <label>Customer Impact</label><input type="text" id="impactCust">
+              <label>Cost (SAR)</label><input type="number" id="impactCost" min="0" step="0.01">
+            </fieldset>
+            <label>Temporary Containment Applied?</label>
+            <select id="containment"><option>No</option><option>Yes</option></select>
+            <label>If Yes, describe</label><textarea id="containmentDesc" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="right"><button type="submit">Submit Complaint</button></div>
+      </form>
+    </div>
+
+    <!-- Table controls: search/filter and export to CSV -->
+    <div class="table-controls">
+      <input type="text" id="searchComplaints" placeholder="Search complaints…">
+      <button id="exportComplaints">Export CSV</button>
+      <!-- CSV import controls for complaints -->
+      <input type="file" id="complaintImportFile" accept=".csv" style="margin-left:1rem;">
+      <button id="importComplaintsBtn">Import CSV</button>
+    </div>
+    <h3>Complaint List</h3>
+    <table id="complaintTable">
+      <tr><th>CC #</th><th>Title</th><th>Customer</th><th>Service</th><th>Assigned</th><th>Severity</th><th>Status</th><th>Manage</th><th>Delete</th></tr>
+    </table>
+  </div>
+</body>
+</html>

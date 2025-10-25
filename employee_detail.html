@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="employees.html">Back to Employees</a>
+    <a href="training.html">Training</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Employee Detail</h2>
+    <!-- Header shows key employee identifiers -->
+    <div id="employeeHeader" class="card"></div>
+    <div class="tabs">
+      <button class="tablink" onclick="openTab(event,'emp_profile')">Profile</button>
+      <button class="tablink" onclick="openTab(event,'emp_trainings')">Assigned Training</button>
+      <button class="tablink" onclick="openTab(event,'emp_assign')">Assign Training</button>
+    </div>
+    <div id="emp_profile" class="tabcontent">
+      <div id="empProfile"></div>
+    </div>
+    <div id="emp_trainings" class="tabcontent">
+      <h3>Training Matrix</h3>
+      <!-- Required training categories for this employee's role -->
+      <div id="empReqTraining" class="mt"></div>
+      <!-- Required training courses for this employee's role -->
+      <div id="empReqCourses" class="mt"></div>
+      <!-- Summary of training taken, scheduled and missing (gaps) -->
+      <div id="empTrainingOverview" class="mt"></div>
+      <table id="empTrainingTable">
+        <tr><th>No</th><th>Course</th><th>Date</th><th>Category</th><th>Status</th><th>Manage</th></tr>
+      </table>
+    </div>
+    <div id="emp_assign" class="tabcontent">
+      <h3>Schedule Training Session for Employee</h3>
+      <form id="empAssignForm" class="grid-3 card">
+        <div>
+          <label>Training Course</label><input type="text" id="empTrTitle" required>
+          <label>Date</label><input type="date" id="empTrDate">
+          <label>Instructor</label><input type="text" id="empTrInstructor">
+        </div>
+        <div>
+          <label>Department</label><input type="text" id="empTrDept">
+        <label>Category</label>
+        <!-- Dynamically populated training categories from Settings -->
+        <select id="empTrCategory"></select>
+        <label>Status</label>
+        <select id="empTrStatus">
+            <option>Scheduled</option>
+            <option>Completed</option>
+            <option>Overdue</option>
+        </select>
+        </div>
+        <div>
+          <label>Notes / Gaps</label><textarea id="empTrNotes" rows="4"></textarea>
+          <button type="submit" class="mt">Add Training</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

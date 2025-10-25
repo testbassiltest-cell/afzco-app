@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipment &amp; Calibration</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Navigation bar mirrors the rest of the application for consistency -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html" class="active">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Equipment &amp; Calibration</h2>
+    <!-- Brief lifecycle hint to guide users through typical statuses -->
+    <div class="status-bar legend"><b>Lifecycle:</b> Active → Maintenance Due → Calibration Due → Out of Service</div>
+    <!-- Equipment creation form -->
+    <div class="card">
+      <h3>Add Equipment</h3>
+      <form id="equipmentForm" class="grid-3">
+        <div>
+          <label>Equipment Tag/ID</label><input type="text" id="eqId" required>
+          <label>Name</label><input type="text" id="eqName" required>
+          <label>Model</label><input type="text" id="eqModel">
+        </div>
+        <div>
+          <label>Location</label><input type="text" id="eqLocation">
+          <label>Owner</label><input type="text" id="eqOwner">
+          <label>Purchase Date</label><input type="date" id="eqPurchase">
+        </div>
+        <div>
+          <label>Next Maintenance</label><input type="date" id="eqMaintenance">
+          <label>Next Calibration</label><input type="date" id="eqCalibration">
+          <label>Status</label>
+          <select id="eqStatus">
+            <option>Active</option>
+            <option>Maintenance Due</option>
+            <option>Calibration Due</option>
+            <option>Out of Service</option>
+          </select>
+          <button type="submit" class="mt">Add Equipment</button>
+        </div>
+      </form>
+    </div>
+    <!-- Controls for searching and exporting the equipment list -->
+    <div class="table-controls">
+      <input type="text" id="searchEquipment" placeholder="Search equipment…">
+      <button id="exportEquipment">Export CSV</button>
+    </div>
+    <h3>Equipment Inventory</h3>
+    <table id="equipmentTable">
+      <tr>
+        <th>Tag/ID</th>
+        <th>Name</th>
+        <th>Model</th>
+        <th>Location</th>
+        <th>Owner</th>
+        <th>Next Maintenance</th>
+        <th>Next Calibration</th>
+        <th>Status</th>
+        <th>Manage</th>
+        <th>Delete</th>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

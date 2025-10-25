@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Internal Audits</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html" class="active">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Audit Scheduler</h2>
+    <form id="auditForm" class="grid-3 card">
+      <div>
+        <label>Year</label><input type="number" id="auditYear" value="2025">
+        <label>Standard(s)</label><input type="text" id="auditStd" placeholder="ISO 9001/14001/45001">
+      </div>
+      <div>
+        <label>Business Unit</label><input type="text" id="auditBU" placeholder="Dammam/Jubail/Yanbu">
+        <label>Process/Area</label><input type="text" id="auditArea">
+      </div>
+      <div>
+        <label>Lead Auditor</label><input type="text" id="auditAuditor">
+        <label>Date</label><input type="date" id="auditDate">
+        <label>Frequency</label>
+        <select id="auditFreq">
+          <option value="">None</option>
+          <option value="Monthly">Monthly</option>
+          <option value="Quarterly">Quarterly</option>
+          <option value="Yearly">Yearly</option>
+        </select>
+        <button type="submit" class="mt">Schedule Audit</button>
+      </div>
+    </form>
+
+    <!-- Table controls: search/filter and export to CSV -->
+    <div class="table-controls">
+      <input type="text" id="searchAudits" placeholder="Search audits…">
+      <button id="exportAudits">Export CSV</button>
+    </div>
+    <h3>Audit Calendar (Table)</h3>
+    <table id="auditTable">
+      <tr><th>Year</th><th>Std(s)</th><th>BU</th><th>Area</th><th>Lead Auditor</th><th>Date</th><th>Status</th><th>Manage</th><th>Delete</th></tr>
+    </table>
+  </div>
+</body>
+</html>

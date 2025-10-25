@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - AFZCO QA/QC</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Simple navbar with just a title; login page does not require navigation links -->
+  <div class="navbar">
+    <h2>AFZCO QA/QC Demo v5</h2>
+  </div>
+  <div class="container small">
+    <h1>Login</h1>
+    <!-- Login form allows either email or username, whichever was assigned. -->
+    <form id="loginForm" class="card">
+      <label>Email or Username
+        <input type="text" id="loginUsername" required autofocus>
+      </label>
+      <label>Password
+        <input type="password" id="loginPassword" required>
+      </label>
+      <button type="submit">Login</button>
+    </form>
+    <p id="loginError" class="error"></p>
+    <hr>
+    <h2>Sign Up</h2>
+    <p class="small-text">Don't have an account? Enter your email and choose a password. Your request will
+      be reviewed by an administrator before activation.</p>
+    <form id="signupForm" class="card">
+      <label>Email
+        <input type="email" id="signupEmail" required>
+      </label>
+      <label>Password
+        <input type="password" id="signupPassword" required>
+      </label>
+      <label>Confirm Password
+        <input type="password" id="signupConfirm" required>
+      </label>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p id="signupError" class="error"></p>
+  </div>
+</body>
+</html>

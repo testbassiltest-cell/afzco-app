@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipment Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Simplified navigation back into the inventory and to other modules -->
+  <div class="navbar">
+    <a href="equipment.html">Back to Equipment</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Equipment Detail</h2>
+    <div id="equipmentHeader" class="card"></div>
+    <div class="tabs">
+      <button class="tablink" onclick="openTab(event,'eq_overview')">Overview</button>
+      <button class="tablink" onclick="openTab(event,'eq_actions')">Maintenance/Calibration</button>
+      <button class="tablink" onclick="openTab(event,'eq_history')">History</button>
+    </div>
+    <div id="eq_overview" class="tabcontent">
+      <div id="equipmentOverview"></div>
+      <h3>Update Status &amp; Dates</h3>
+      <form id="equipmentStatusForm" class="card">
+        <label>Status</label>
+        <select id="equipmentStatus">
+          <option>Active</option>
+          <option>Maintenance Due</option>
+          <option>Calibration Due</option>
+          <option>Out of Service</option>
+        </select>
+        <label>Next Maintenance</label><input type="date" id="equipmentNextMaint">
+        <label>Next Calibration</label><input type="date" id="equipmentNextCalib">
+        <button type="button" onclick="saveEquipmentStatus()">Save</button>
+      </form>
+    </div>
+    <div id="eq_actions" class="tabcontent">
+      <h3>Add Calibration</h3>
+      <form id="equipmentCalibForm" class="grid-3 card">
+        <div>
+          <label>Certificate No</label><input type="text" id="calibCertNo" required>
+          <label>Date</label><input type="date" id="calibDate">
+        </div>
+        <div>
+          <label>Result</label>
+          <select id="calibResult">
+            <option>Pass</option>
+            <option>Fail</option>
+          </select>
+          <label>Comments</label><input type="text" id="calibComments">
+        </div>
+        <div>
+          <button type="submit" class="mt">Add Calibration</button>
+        </div>
+      </form>
+      <h3>Calibrations</h3>
+      <ul id="equipmentCalibList" class="list"></ul>
+
+      <h3>Add Task</h3>
+      <form id="equipmentActionForm" class="grid-3 card">
+        <div>
+          <label>Title</label><input type="text" id="eqTaskTitle" required>
+          <label>Owner</label><input type="text" id="eqTaskOwner">
+        </div>
+        <div>
+          <label>Department</label><input type="text" id="eqTaskDept">
+          <label>Due Date</label><input type="date" id="eqTaskDue">
+        </div>
+        <div>
+          <button type="submit" class="mt">Add Task</button>
+        </div>
+      </form>
+      <h3>Tasks List</h3>
+      <ul id="equipmentActionList" class="list"></ul>
+    </div>
+    <div id="eq_history" class="tabcontent">
+      <h3>History</h3>
+      <ul id="equipmentHistory" class="list"></ul>
+    </div>
+  </div>
+</body>
+</html>

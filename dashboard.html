@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <h2>AFZCO QA/QC Demo v5</h2>
+    <!-- Dashboard page includes a Home link for navigation back to the tasks overview and a Risk Register link -->
+    <a href="index.html">Home</a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Complaints by Status</h3>
+        <canvas id="cmpStatusChart" width="380" height="220"></canvas>
+      </div>
+      <div class="card">
+        <h3>Actions by Status</h3>
+        <canvas id="actStatusChart" width="380" height="220"></canvas>
+      </div>
+      <div class="card">
+        <h3>Top Services with Complaints</h3>
+        <canvas id="svcBar" width="380" height="220"></canvas>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="kpi card">
+        <div class="kpi-title">SLA Breaches</div>
+        <div id="slaBreachCount" class="kpi-value">0</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Open CAPAs</div>
+        <div id="openCapas" class="kpi-value">0</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Audits This Month</div>
+        <div id="auditsPlanned" class="kpi-value">0</div>
+      </div>
+    </div>
+    <!-- Additional KPI charts row -->
+    <div class="grid-3">
+      <div class="card">
+        <h3>Training by Status</h3>
+        <canvas id="trainingStatusChart" width="380" height="220"></canvas>
+      </div>
+      <div class="card">
+        <h3>Safety Issues by Status</h3>
+        <canvas id="safetyStatusChart" width="380" height="220"></canvas>
+      </div>
+      <div class="card">
+        <h3>Audits by Status</h3>
+        <canvas id="auditStatusChart" width="380" height="220"></canvas>
+      </div>
+    </div>
+    <!-- Personal task list for the logged in user -->
+    <div class="card" id="myTasksCard" style="margin-top: 1.5rem;">
+      <h3>My Pending Tasks</h3>
+      <ul id="myTasksList"></ul>
+    </div>
+    <!-- Training compliance summary -->
+    <div class="card" id="trainingComplianceCard" style="margin-top: 1.5rem;">
+      <h3>Training Compliance</h3>
+      <p class="small-text">How many employees have completed all required training courses for their role versus those missing requirements.</p>
+      <canvas id="trainingComplianceChart" width="380" height="220"></canvas>
+    </div>
+  </div>
+</body>
+</html>

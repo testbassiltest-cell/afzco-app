@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="complaints.html">Back to Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container" id="complaintDetailContainer">
+    <h2>Complaint Detail</h2>
+    <div id="headerCard" class="card"></div>
+    <div class="status-bar" id="statusBar"></div>
+
+    <div class="tabs">
+      <button class="tablink" data-stage="overview" onclick="openTab(event,'overview')">Overview</button>
+      <button class="tablink" data-stage="triage" onclick="openTab(event,'triage')">Triage</button>
+      <button class="tablink" data-stage="investigation" onclick="openTab(event,'investigation')">Investigation</button>
+      <button class="tablink" data-stage="actions" onclick="openTab(event,'actions')">Actions (CAPA)</button>
+      <button class="tablink" data-stage="effectiveness" onclick="openTab(event,'effectiveness')">Effectiveness Check</button>
+      <button class="tablink" data-stage="evidence" onclick="openTab(event,'evidence')">Evidence</button>
+      <button class="tablink" data-stage="communication" onclick="openTab(event,'communication')">Communication</button>
+      <button class="tablink" data-stage="history" onclick="openTab(event,'history')">History</button>
+    </div>
+
+    <div id="overview" class="tabcontent">
+      <h3>Overview</h3>
+      <div id="overviewContent"></div>
+      <label>Internal Notes</label>
+      <textarea id="internalNotes" placeholder="Internal notes"></textarea>
+      <div class="right"><button onclick="saveNotes()">Save Notes</button></div>
+    </div>
+
+    <div id="triage" class="tabcontent">
+      <h3>Triage (QA Lead)</h3>
+      <div class="grid-3">
+        <div>
+          <label>Severity</label><select id="severity"><option>Critical</option><option>Major</option><option>Minor</option></select>
+          <label>Priority</label><select id="priority"><option>P1</option><option>P2</option><option>P3</option></select>
+          <label>SLA Target Date</label><input type="date" id="slaDate">
+        </div>
+        <div>
+          <label>Owner Department</label><input type="text" id="ownerDept">
+          <label>Responsible Person</label><input type="text" id="responsible">
+          <label>Visibility</label><select id="visibility"><option>Internal</option><option>Customer Summary</option></select>
+        </div>
+        <div class="align-end">
+          <button onclick="saveTriage()">Save & Move to Investigation</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="investigation" class="tabcontent">
+      <h3>Investigation (Owner)</h3>
+      <label>5 Whys (one per line)</label>
+      <textarea id="whys" rows="6" placeholder="Why 1...\nWhy 2...\nWhy 3...\nWhy 4...\nWhy 5..."></textarea>
+      <fieldset class="fieldset">
+        <legend>Fishbone Categories</legend>
+        <div class="tags">
+          <label><input type="checkbox" class="fishbone" value="Methods"> Methods</label>
+          <label><input type="checkbox" class="fishbone" value="Manpower"> Manpower</label>
+          <label><input type="checkbox" class="fishbone" value="Machine"> Machine</label>
+          <label><input type="checkbox" class="fishbone" value="Materials"> Materials</label>
+          <label><input type="checkbox" class="fishbone" value="Environment"> Environment</label>
+          <label><input type="checkbox" class="fishbone" value="Measurement"> Measurement</label>
+        </div>
+      </fieldset>
+      <label>Root Cause</label><textarea id="rootCause" rows="4"></textarea>
+      <label>Contributing Causes</label><textarea id="contribCauses" rows="3"></textarea>
+      <label>Verification of Cause (evidence link or note)</label><input type="text" id="verifyCause">
+      <div class="right"><button onclick="saveInvestigation()">Save & Move to CAPA</button></div>
+    </div>
+
+    <div id="actions" class="tabcontent">
+      <h3>CAPA Actions</h3>
+      <form id="capaForm" class="grid-3">
+        <div>
+          <label>Action Title</label><input type="text" id="capaTitle" required>
+          <label>Owner</label>
+          <!-- Dynamically populated with employees -->
+          <select id="capaOwner"></select>
+        </div>
+        <div>
+          <label>Department</label><input type="text" id="capaDept">
+          <label>Due Date</label><input type="date" id="capaDue">
+        </div>
+        <div class="align-end">
+          <button type="submit">Add CAPA Action</button>
+        </div>
+      </form>
+      <ul id="capaList" class="list"></ul>
+      <div class="right"><button onclick="markVerifying()">Move to Verifying</button></div>
+    </div>
+
+    <div id="effectiveness" class="tabcontent">
+      <h3>Effectiveness Check</h3>
+      <label>Effective?</label><select id="effective"><option>Yes</option><option>No</option></select>
+      <label>Notes</label><textarea id="effectivenessNotes" rows="3"></textarea>
+      <div class="right">
+        <button onclick="closeComplaint()">Finalize Closure</button>
+      </div>
+    </div>
+
+    <div id="evidence" class="tabcontent">
+      <h3>Evidence</h3>
+      <input type="file" id="evidenceUpload" multiple>
+      <ul id="evidenceList" class="list"></ul>
+    </div>
+
+    <div id="communication" class="tabcontent">
+      <h3>Communication</h3>
+      <form id="commForm" class="grid-3">
+        <div>
+          <label>To</label><input type="text" id="commTo" placeholder="customer@example.com">
+          <label>Subject</label><input type="text" id="commSubject">
+        </div>
+        <div>
+          <label>Message</label><textarea id="commBody" rows="4"></textarea>
+        </div>
+        <div class="align-end">
+          <button type="submit">Log Message</button>
+        </div>
+      </form>
+      <ul id="commList" class="list"></ul>
+    </div>
+
+    <div id="history" class="tabcontent">
+      <h3>History</h3>
+      <ul id="historyList" class="list"></ul>
+    </div>
+
+    <div class="right"><button onclick="generateReport()">Generate Closure Report</button></div>
+  </div>
+</body>
+</html>

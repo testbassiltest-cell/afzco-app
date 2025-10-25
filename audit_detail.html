@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audit Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="audits.html">Back to Audits</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Audit Detail</h2>
+    <div id="auditHeader" class="card"></div>
+
+    <div class="tabs">
+      <button class="tablink" onclick="openTab(event,'a_overview')">Overview</button>
+      <button class="tablink" onclick="openTab(event,'a_findings')">Findings</button>
+      <button class="tablink" onclick="openTab(event,'a_history')">History</button>
+      <button class="tablink" onclick="openTab(event,'a_checklist')">Checklist</button>
+    </div>
+
+    <div id="a_overview" class="tabcontent">
+      <div id="auditOverview"></div>
+    </div>
+
+    <div id="a_findings" class="tabcontent">
+      <h3>New Finding (NCR/OFI)</h3>
+      <form id="findingForm" class="grid-3 card">
+        <div>
+          <label>Type</label><select id="fType"><option>Major</option><option>Minor</option><option>OFI</option></select>
+          <label>Clause/Requirement</label><input type="text" id="fClause" placeholder="e.g., ISO 9001:8.7">
+        </div>
+        <div>
+          <label>Statement of Nonconformity</label><textarea id="fStatement" rows="4"></textarea>
+          <label>Responsible</label><input type="text" id="fResp">
+        </div>
+        <div>
+          <label>Target Date</label><input type="date" id="fDue">
+          <button type="submit" class="mt">Add Finding</button>
+        </div>
+      </form>
+      <h3>Findings List</h3>
+      <table id="findingTable">
+        <tr><th>ID</th><th>Type</th><th>Clause</th><th>Statement</th><th>Responsible</th><th>Target</th><th>Status</th><th>Actions</th></tr>
+      </table>
+    </div>
+
+    <div id="a_history" class="tabcontent">
+      <ul id="auditHistory" class="list"></ul>
+    </div>
+
+    <div id="a_checklist" class="tabcontent">
+      <h3>Add Checklist Item</h3>
+      <form id="checklistForm" class="grid-3 card">
+        <div>
+          <label>Question/Item</label>
+          <input type="text" id="clQuestion" placeholder="Enter checklist question" required>
+        </div>
+        <div>
+          <label>Score</label>
+          <input type="number" id="clScore" min="0" max="10" step="1" value="0" required>
+        </div>
+        <div>
+          <label>Evidence File</label>
+          <input type="file" id="clEvidenceFile" accept="*/*">
+          <button type="submit" class="mt">Add Item</button>
+        </div>
+      </form>
+      <h3>Checklist Items</h3>
+      <table id="checklistTable">
+        <tr><th>#</th><th>Item</th><th>Score</th><th>Evidence</th><th>Delete</th></tr>
+      </table>
+      <p id="checklistSummary"></p>
+    </div>
+  </div>
+</body>
+</html>

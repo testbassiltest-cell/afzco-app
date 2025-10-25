@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOM Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="mom.html">Back to MOM</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>MOM Detail</h2>
+    <div id="momHeader" class="card"></div>
+
+    <h3>Inline Actions</h3>
+    <form id="momActionForm" class="grid-3 card">
+      <div>
+        <label>Action Title</label><input type="text" id="mActTitle">
+        <label>Owner</label><input type="text" id="mActOwner">
+      </div>
+      <div>
+        <label>Department</label><input type="text" id="mActDept">
+        <label>Due Date</label><input type="date" id="mActDue">
+      </div>
+      <div class="align-end">
+        <button type="submit">Add Action</button>
+      </div>
+    </form>
+    <ul id="momActionList" class="list"></ul>
+  </div>
+</body>
+</html>

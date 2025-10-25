@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Safety Issues</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="complaints.html">Customer Complaints</a>
+    <a href="actions.html">Action Management</a>
+    <a href="audits.html">Internal Audits</a>
+    <a href="mom.html">MOM</a>
+    <a href="permits.html">Permit to Work</a>
+    <a href="safety.html" class="active">Safety Issues</a>
+    <a href="sds.html">SDS</a>
+    <a href="training.html">Training</a>
+    <a href="risk.html">Risk Register</a>
+    <a href="equipment.html">Equipment &amp; Calibration</a>
+    <a href="change.html">Change Management</a>
+    <a href="employees.html">Employees</a>
+    <a href="audit_logs.html" id="navLogs">Audit Logs</a>
+    <a href="settings.html" id="navSettings">Settings</a>
+    <span id="navUser" class="nav-user"></span>
+    <a href="#" id="navLogout">Logout</a>
+  </div>
+  <div class="container">
+    <h2>Safety Issues</h2>
+    <div class="status-bar legend"><b>Lifecycle:</b> New → Investigating → Actioning → Closed</div>
+    <div class="card">
+      <h3>Report Safety Issue</h3>
+      <form id="safetyForm" class="grid-3">
+        <div>
+          <label>Title</label><input type="text" id="safetyTitle" required>
+          <label>Type</label>
+          <select id="safetyType"><option>Hazard</option><option>Near Miss</option><option>Incident</option></select>
+          <label>Location</label><input type="text" id="safetyLocation">
+        </div>
+        <div>
+          <label>Date</label><input type="date" id="safetyDate">
+          <label>Reported By</label><input type="text" id="safetyReportedBy">
+          <label>Severity</label>
+          <select id="safetySeverity"><option>Minor</option><option>Major</option><option>Critical</option></select>
+          <label>Hazard Category</label>
+          <!-- Dynamically populated from Settings > Category Management (hazardTypes) -->
+          <select id="safetyHazardType"></select>
+          <!-- Incident classification fields -->
+          <label>Incident Category</label>
+          <select id="safetyIncidentCategory">
+            <option>Injury</option>
+            <option>Property Damage</option>
+            <option>Environmental Spill</option>
+            <option>Other</option>
+          </select>
+          <label>People Affected</label><input type="number" id="safetyPeopleAffected" min="0" value="0">
+          <label>Environmental Impact</label>
+          <select id="safetyEnvImpact">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          <label>Cost</label><input type="number" id="safetyCost" min="0" step="0.01" value="0">
+        </div>
+        <div>
+          <label>Description</label><textarea id="safetyDesc" rows="4"></textarea>
+          <label>Photos</label><input type="file" id="safetyImages" accept="image/*" multiple>
+          <button type="submit" class="mt">Submit Issue</button>
+        </div>
+      </form>
+    </div>
+    <!-- Table controls: search/filter and export to CSV -->
+    <div class="table-controls">
+      <input type="text" id="searchSafety" placeholder="Search safety issues…">
+      <button id="exportSafety">Export CSV</button>
+    </div>
+    <h3>Safety Issues</h3>
+    <table id="safetyTable">
+      <tr><th>No</th><th>Title</th><th>Type</th><th>Severity</th><th>Date</th><th>Status</th><th>Manage</th><th>Delete</th></tr>
+    </table>
+  </div>
+</body>
+</html>
